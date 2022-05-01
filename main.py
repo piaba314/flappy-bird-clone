@@ -10,6 +10,7 @@ class Jogo:
         pygame.init()
         self.tela = pygame.display.set_mode(DIMENSOES_DA_TELA)
         pygame.display.set_caption("Flappy Bird Clone")
+        pygame.display.set_icon(pygame.image.load("assets/favicon.png").convert_alpha())
         self.relogio = pygame.time.Clock()
 
         self.objetos = pygame.sprite.Group()
