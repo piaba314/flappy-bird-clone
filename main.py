@@ -16,7 +16,7 @@ class Jogo:
 
         self.objetos = pygame.sprite.Group()
         self.mundo = pymunk.Space()
-        self.mundo.gravity = 0, 200
+        self.mundo.gravity = 0, 500
 
         self.background = Background(self.objetos)
         self.ground = Ground(self.objetos)
