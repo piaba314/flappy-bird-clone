@@ -1,4 +1,5 @@
 import pygame
+import pymunk
 import sys
 from config import DIMENSOES_DA_TELA, FPS
 from bird import Bird
@@ -14,9 +15,12 @@ class Jogo:
         self.relogio = pygame.time.Clock()
 
         self.objetos = pygame.sprite.Group()
+        self.mundo = pymunk.Space()
+        self.mundo.gravity = 0, 200
+
         self.background = Background(self.objetos)
         self.ground = Ground(self.objetos)
-        self.bird = Bird(self.objetos)
+        self.bird = Bird(self.mundo, self.objetos)
 
     def main(self):
         while True:
@@ -29,9 +33,11 @@ class Jogo:
             if evento.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
+            self.bird.processa_evento(evento)
 
     def atualiza_mundo(self):
         delta = self.relogio.tick(FPS)/1000
+        self.mundo.step(delta)
         self.objetos.update(delta)
     
     def renderiza_mundo(self):
