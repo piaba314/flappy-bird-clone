@@ -1,8 +1,9 @@
 import pygame
 import sys
-from config import DIMENSOES_DA_TELA
+from config import DIMENSOES_DA_TELA, FPS
 from bird import Bird
 from background import Background
+from ground import Ground
 
 class Jogo:
     def __init__(self):
@@ -13,6 +14,7 @@ class Jogo:
 
         self.objetos = pygame.sprite.Group()
         self.background = Background(self.objetos)
+        self.ground = Ground(self.objetos)
         self.bird = Bird(self.objetos)
 
     def main(self):
@@ -28,8 +30,8 @@ class Jogo:
                 sys.exit()
 
     def atualiza_mundo(self):
-        pass
-
+        delta = self.relogio.tick(FPS)/1000
+        self.objetos.update(delta)
     
     def renderiza_mundo(self):
         self.objetos.draw(self.tela)
